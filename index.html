@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="login-style.css" />
+    <title>Login - Student Management System</title>
+    <!-- Font Awesome Cdn Link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-form">
+        <div class="logo">
+          <img src="logo.jpg" alt="Logo" />
+          <h2>Student Management System</h2>
+        </div>
+
+        <!-- Tab Buttons -->
+        <div class="tab-buttons">
+          <button class="tab-button active" onclick="showTab('student')">Student Login</button>
+          <button class="tab-button" onclick="showTab('teacher')">Teacher Login</button>
+        </div>
+
+        <!-- Student Login Form -->
+        <div id="student" class="tab-content active">
+          <form id="studentLoginForm" action="#" method="post">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" id="studentUsername" name="username" placeholder="Student Username" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="studentPassword" name="password" placeholder="Student Password" required />
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <div class="forgot-password">
+              <a href="#">Forgot Password?</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- Teacher Login Form -->
+        <div id="teacher" class="tab-content">
+          <form id="teacherLoginForm" action="#" method="post" onsubmit="return validateTeacherLogin()">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" id="teacherUsername" name="username" placeholder="Teacher Username" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="teacherPassword" name="password" placeholder="Teacher Password" required />
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <div class="forgot-password">
+              <a href="#">Forgot Password?</a>
+            </div>
+          </form>
+        </div>
+        
+        <script>
+          // Function to handle tab switching
+          function showTab(tabName) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+              tabcontent[i].classList.remove("active");
+            }
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+              tabbuttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+          }
+        
+          // Default to show student login
+          document.addEventListener('DOMContentLoaded', function() {
+            showTab('student');
+          });
+        
+          // Function to validate teacher login
+          function validateTeacherLogin() {
+            var username = document.getElementById("teacherUsername").value;
+            var password = document.getElementById("teacherPassword").value;
+        
+            // Check if credentials match
+            if (username === "admin" && password === "admin123") {
+              // Navigate to the dashboard or desired page
+              window.location.href = "dashboard.html"; // Replace with the correct URL
+              return false; // Prevent form submission
+            } else {
+              alert("Invalid credentials. Please try again.");
+              return false; // Prevent form submission
+            }
+          }
+        </script>
+        
+  </body>
+</html>
